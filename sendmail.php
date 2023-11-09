@@ -1,4 +1,5 @@
 
+<?php
 //php is needed to send emails on the server side
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if(
@@ -25,3 +26,4 @@ echo "Failed to send message.";
 }
 }
 }
+?>

@@ -33,6 +33,38 @@
     <link rel="stylesheet" href="styles/form.css" />
     <link rel="stylesheet" href="styles/buttons.css" />
     <link rel="stylesheet" href="styles/mediaQueries.css" />
+
+    <script>
+      //Check form and prevent form submission if validation fails
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", (event) => {
+          const contactForm = event.target;
+          if (!validateContactForm(contactForm)) {
+            event.preventDefault();
+            displayError(contactForm, "Invalid input");
+          }
+        });
+
+      // Function to validate email addresses
+      function isValidEmail(email) {
+        // Define the JS Regex pattern for a valid email address
+        const emailRegex =
+          /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+        // Test the email against the pattern and return the result (true or false)
+        return emailRegex.test(email);
+      }
+
+      // Function to validate phone numbers
+      function isValidPhoneNumber(phone) {
+        // Define the JS Regex pattern for a valid 10-digit phone number
+        const phoneRegex = /^\d{10}$/;
+
+        // Test the phone number against the pattern and return the result (true or false)
+        return phoneRegex.test(phone);
+      }
+    </script>
   </head>
 
   <body>
@@ -109,20 +141,38 @@
         <!-- Form -->
         <!-- Wrap form in a form tag 
           with the action value set to "sendmail"-->
-        <form id="contact-form" method="POST" action="sendmail.php" >
+        <form id="contact-form" method="POST" action="sendmail.php">
           <div class="form">
             <div class="form-group">
-              <input type="text" id="fullName" placeholder="Your name" name="name" required />
+              <input
+                type="text"
+                id="fullName"
+                placeholder="Your name"
+                name="name"
+                required
+              />
               <label for="fullName">Your Name</label>
             </div>
 
             <div class="form-group">
-              <input type="email" id="email" placeholder="Email" name="email" required/>
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                name="email"
+                required
+              />
               <label for="email">Email</label>
             </div>
 
             <div class="form-group">
-              <input type="tel" id="tel" placeholder="Phone Number" name="phone number"/>
+              <input
+                type="tel"
+                id="tel"
+                placeholder="Phone Number"
+                name="phone"
+                
+              />
               <label for="tel">Phone Number</label>
             </div>
 
@@ -130,7 +180,8 @@
               <textarea
                 name="message"
                 id="message"
-                placeholder="Message" required
+                placeholder="Message"
+                required
               ></textarea>
               <label for="message">Message</label>
             </div>
