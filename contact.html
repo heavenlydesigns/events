@@ -107,34 +107,42 @@
         </div>
 
         <!-- Form -->
-        <!-- Note that in a real app a form must be wrapped in a form tag with the action value -->
-        <div class="form">
-          <div class="form-group">
-            <input type="text" id="fullName" placeholder="Your name" />
-            <label for="fullName">Your Name</label>
-          </div>
+        <!-- Wrap form in a form tag 
+          with the action value set to "sendmail"-->
+        <form id="contact-form" method="POST" action="sendmail.php" >
+          <div class="form">
+            <div class="form-group">
+              <input type="text" id="fullName" placeholder="Your name" name="name" required />
+              <label for="fullName">Your Name</label>
+            </div>
 
-          <div class="form-group">
-            <input type="email" id="email" placeholder="Email" />
-            <label for="email">Email</label>
-          </div>
+            <div class="form-group">
+              <input type="email" id="email" placeholder="Email" name="email" required/>
+              <label for="email">Email</label>
+            </div>
 
-          <div class="form-group">
-            <textarea
-              name="message"
-              id="message"
-              placeholder="Message"
-            ></textarea>
-            <label for="message">Message</label>
-          </div>
+            <div class="form-group">
+              <input type="tel" id="tel" placeholder="Phone Number" name="phone number"/>
+              <label for="tel">Phone Number</label>
+            </div>
 
-          <!-- Spacer10 -->
-          <div class="spacer10"></div>
+            <div class="form-group">
+              <textarea
+                name="message"
+                id="message"
+                placeholder="Message" required
+              ></textarea>
+              <label for="message">Message</label>
+            </div>
 
-          <div class="centred-btn-wrapper">
-            <button type="submit" class="btn">Send</button>
+            <!-- Spacer10 -->
+            <div class="spacer10"></div>
+
+            <div class="centred-btn-wrapper">
+              <button type="submit" class="btn">Send</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
 
