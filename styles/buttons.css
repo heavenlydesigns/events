@@ -1,4 +1,4 @@
-.btn {
+.btn:enabled {
     background-color: #cea135;
     color: #11122b;
     font-size: 1.25em;
@@ -15,7 +15,7 @@
     justify-content: center;
 }
 
-.btn:active {
+.btn:focus{
     background-color: #cea135;
     color: #11122b;
     font-size: 1.25em;
@@ -25,3 +25,13 @@
     outline: none;
     box-shadow: 0px 0px 0px; 
 }
+
+.btn:disabled{
+    font-size: 20px;
+    color: grey;
+    font-weight: bold;
+    border: 3px solid grey;
+}
+
+
+

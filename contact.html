@@ -35,37 +35,8 @@
     <link rel="stylesheet" href="styles/mediaQueries.css" />
 
     <script>
-      /*
-      //Check form and prevent form submission if validation fails
-      document
-        .getElementById("contact-form")
-        .addEventListener("submit", (event) => {
-          const contactForm = event.target;
-          if (!validateContactForm(contactForm)) {
-            event.preventDefault();
-            displayError(contactForm, "Invalid input");
-          }
-        });
-*/
-      /*  // Function to validate email addresses
-      function isValidEmail(email) {
-        // Define the JS Regex pattern for a valid email address
-        const emailRegex =
-          /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
-        // Test the email against the pattern and return the result (true or false)
-        return emailRegex.test(email);
-      }
-*/
-      /*// Function to validate phone numbers
-      function isValidPhoneNumber(phone) {
-        // Define the JS Regex pattern for a valid 10-digit phone number
-        const phoneRegex = /^\d{10}$/;
-
-        // Test the phone number against the pattern and return the result (true or false)
-        return phoneRegex.test(phone);
-      }
-      */
+      
+     
     </script>
   </head>
 
@@ -142,8 +113,14 @@
 
         <!-- Form -->
         <!-- Wrap form in a form tag 
-          with the action value set to "sendmail"-->
-        <form class="gform" id="contact-form">
+          with the action value set to Google API link-->
+        <form
+          class="gform"
+          id="contact-form"
+          method="post"
+          action="https://script.google.com/macros/s/AKfycbwqz_qFxcZAeuXkrkMQgPcOzwtCu6sCYfaW7DskytfZ3mPBqsIMLVHv1cuA_AxPBi9l/exec"
+         
+        >
           <div class="form">
             <div class="form-group">
               <input
@@ -171,10 +148,12 @@
               <input
                 type="tel"
                 id="tel"
-                placeholder="Phone Number"
+                placeholder="Phone Number (Optional)"
                 name="phone"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                
               />
-              <label for="tel">Phone Number</label>
+              <label for="tel">Phone Number (Optional)</label>
             </div>
 
             <div class="form-group">
@@ -187,6 +166,24 @@
               <label for="message">Message</label>
             </div>
 
+            <!--HoneyPot Field-->
+            <div class="form-group" aria-hidden="true">
+              <input
+                type="usercode"
+                class="usercode
+                id="usercode"
+                placeholder="Got You Honey"
+                name="usercode"
+                tabindex="-1"
+                value=""
+                autocomplete="off" 
+                name="usercode"               
+              />
+             
+              <label for="usercode">gotYouHoney</label>
+            </div>
+
+
             <!-- Spacer10 -->
             <div class="spacer10"></div>
 
@@ -195,15 +192,18 @@
             </div>
           </div>
 
-          <div class="thankyou" style="display: none" >
+          <div class="thankyou" style="display: none;">
             <!-- You can customize the thankyou message by editing the code below -->
             <h2>
               <em>Thanks</em> for contacting us! We will get back to you soon!
             </h2>
           </div>
+          
         </form>
       </div>
     </div>
+
+    
 
     <!-- Helper Space 60 -->
     <div class="spacer60"></div>
@@ -221,7 +221,7 @@
 
         <!-- Phone & Contact-Hours -->
         <div class="phone-hours-footer">
-          <span class="phone-footer"> 868 305 2257 </span>
+          <span class="phone-footer"> 868-305-2257 </span>
 
           <span class="hours-footer"> 8 AM - 5 PM </span>
         </div>
@@ -263,21 +263,131 @@
     </div>
 
     <script>
-      //Reference button and thankyou class
-      const btn = document.querySelector("button");
-      const thanks = document.querySelector(".thankyou");
+ //Check form and prevent form submission if validation fails
+ 
+        
+ var phone_input = document.getElementById("tel");
 
-      //Add event listener to button
-      btn.addEventListener("click", updateBtn);
-      
+ phone_input.addEventListener('input', () => {
+  phone_input.setCustomValidity('');
+  phone_input.checkValidity();
+});
 
-      //Create function
-      function updateBtn(e) {
-       
-        if (this.id === "send") {
-          thanks.style.display = "block";
-        }
+phone_input.addEventListener('invalid', () => {
+  if(phone_input.value === '') {
+    phone_input.setCustomValidity('Enter phone number!');
+  } else {
+    phone_input.setCustomValidity('Enter phone number in this format: 123-456-7890');
+  }
+});
+
+
+      (function() {
+  // get all data in form and return object
+  function getFormData(form) {
+    var elements = form.elements;
+    var usercode;
+
+    var fields = Object.keys(elements).filter(function(k) {
+      if (elements[k].name === "usercode") {
+        usercode = elements[k].value;
+        return false;
       }
+      return true;
+    }).map(function(k) {
+      if(elements[k].name !== undefined) {
+        return elements[k].name;
+      // special case for Edge's html collection
+      }else if(elements[k].length > 0){
+        return elements[k].item(0).name;
+      }
+    }).filter(function(item, pos, self) {
+      return self.indexOf(item) == pos && item;
+    });
+
+    var formData = {};
+    fields.forEach(function(name){
+      var element = elements[name];
+      
+      // singular form elements just have one value
+      formData[name] = element.value;
+
+      // when our element has multiple items, get their values
+      if (element.length) {
+        var data = [];
+        for (var i = 0; i < element.length; i++) {
+          var item = element.item(i);
+          if (item.checked || item.selected) {
+            data.push(item.value);
+          }
+        }
+        formData[name] = data.join(', ');
+      }
+    });
+
+    // add form-specific values into the data
+    formData.formDataNameOrder = JSON.stringify(fields);
+    formData.formGoogleSheetName = form.dataset.sheet || "responses"; // default sheet name
+    formData.formGoogleSendEmail
+      = form.dataset.email || ""; // no email by default
+
+    return {data: formData, usercode: usercode};
+  }
+
+  function handleFormSubmit(event) {  // handles form submit without any jquery
+    event.preventDefault();           // we are submitting via xhr below
+    var form = event.target;
+    var formData = getFormData(form);
+    var data = formData.data;
+
+    // If a honeypot field is filled, assume it was done so by a spam bot.
+    if (formData.usercode) {
+      console.log("Got a spam!");
+      return false;
+    }
+
+    disableAllButtons(form);
+    var url = form.action;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    // xhr.withCredentials = true;
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          form.reset();
+          formElements = form.querySelector("contact-form")
+          if (formElements) {
+            formElements.style.display = "none"; // hide form
+          }
+          var thankYouMessage = form.querySelector(".thankyou");
+          if (thankYouMessage) {
+            thankYouMessage.style.display = "block";
+          }
+        }
+    };
+    // url encode form data for sending as post data
+    var encoded = Object.keys(data).map(function(k) {
+        return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+    }).join('&');
+    xhr.send(encoded);
+  }
+  
+  function loaded() {
+    // bind to the submit event of our form
+    var forms = document.querySelectorAll("form.gform");
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener("submit", handleFormSubmit, false);
+    }
+  };
+  document.addEventListener("DOMContentLoaded", loaded, false);
+
+  function disableAllButtons(form) {
+    var buttons = form.querySelectorAll("button");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+    }
+  }
+})();
     </script>
   </body>
 </html>
