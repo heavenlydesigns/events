@@ -42,7 +42,7 @@
 }
 
 .skewed-header > .skewed-header-wrapper > .skewed-header-content > .heading-wrapper {
-    background-color: #cea135;
+   /* background-color: #cea135;*/
     color:#11122b;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
