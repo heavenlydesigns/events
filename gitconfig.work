@@ -1,0 +1,11 @@
+# ~/work/.gitconfig.work
+ 
+[user]
+email = jancardo99@gmail.com
+name = Janice Charles
+ 
+[github]
+user = "heavenlydesigns"
+ 
+[core]
+sshCommand = "ssh -i ~/.ssh/ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB69PXWb0R8zAWdaAXKrZTAsjL6CCy98DYdvuggZvy89 jancardo99@gmail.com"
