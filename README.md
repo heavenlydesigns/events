@@ -5,3 +5,4 @@ I learned about honeypot as one defence against spam which I successfully implem
 The html was easy.  The css was moderate.
 
 Testing config 14/11/23 at 5:20 p.m.
+Testing config 15/11/23
