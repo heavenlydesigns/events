@@ -1,8 +1,9 @@
 /*Common Footer Styles*/
 .footer {
     height: 190px;
-	background-color: #11122b;
-	color: #cbcbcb;	
+	background-color: lightblue;
+	color: black;
+	font-weight: bold;
     font-family: "Ubuntu Condensed, sans-serif";
 	padding: 50px 100px 60px 100px;
     /*Make a Flex Container*/
@@ -44,7 +45,8 @@
 
 .footer > .footer-inner > .phone-hours-footer > .hours-footer {
     margin-left: 20px;
-    color: #cea135;
+    color: black;
+	font-weight: bold;
     text-transform: uppercase;
 }
 
@@ -66,6 +68,8 @@
     transition-duration: 0.5s;
     width: 75%;
     text-align: center;
+    color: black;
+	font-weight: bold;
 }
 
 .footer > .footer-inner > .links-wrapper-footer > .nav-link-footer > a:hover {
@@ -81,7 +85,8 @@
 }
 
 .footer > .footer-inner > .footer-icons > a  {
-    color: white;
+    color: black;
+	font-weight: bold;
     text-decoration: none;   
 }
 

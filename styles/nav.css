@@ -1,8 +1,9 @@
 /*Common Navigation Styles*/
 .navigation {
     height: 190px;
-	background-color: #11122b;
-	color: #cbcbcb;
+	background-color: lightblue;
+	color: black;
+	font-weight: bold;
 	/*Make a Flexbox Container*/
 	display: flex;
 	justify-content: space-between;
@@ -21,7 +22,6 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-gap: 10px;
-
 }
 
 /*Refraction (Code path specificity): e.g. ".left-column" could be reused with different styles elsewhere*/
@@ -33,11 +33,13 @@
 /* .icon i refers to all the "i" in .icon*/
 .navigation .left-column .phone-icon i {
 	font-size: 2em;
+	
 }
 	
 .navigation > .left-column > .contact-hours > .hours {
 	font-family: 'Ubuntu Condensed', sans-serif;
-	color: #858585;
+	color: black;
+	font-weight: bold;
 }
 
 .left-column > .address{
@@ -62,6 +64,7 @@
 .navigation > .center-column > .banner-image {
 	display: flex;
 	justify-content: center;
+	
 }
 .navigation > .center-column > .banner-image img {
 	width: 216px;
@@ -72,6 +75,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	
 	
 }
 
@@ -86,7 +90,8 @@
 	color: #cbcbcb;
 	transition: 0.5s;
 	text-decoration: none;/*Remove underline*/
-
+	color: black;
+	font-weight: bold;
 }
 
 .links-wrapper > .nav-link > a:hover {
@@ -99,14 +104,18 @@
 .navigation > .right-column {
 	display: flex;
 	align-items: center;
+	color: black;
+	font-weight: bold;
 }
 .navigation > .right-column > .address {	
 	font-family: 'Ubuntu Condensed', sans-serif;
 	text-align: right;
+	
 }
 
 .navigation > .right-column > .address a {
-	color: #858585;
+	color: black;
+	font-weight: bold;
 	text-decoration: none;
 	font-size: 0.9em;
 	transition: 0.5s;
@@ -119,11 +128,12 @@
 .navigation > .right-column > .contact-icon {
 	margin-left: 15px;
 	font-size: 2em;
+	
 }
 
 
 .navigation > .right-column > .contact-icon a {
-	color: #cbcbcb;
+	color: brown;
 	transition: 0.5s;
 }
 

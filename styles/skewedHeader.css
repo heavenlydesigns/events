@@ -17,7 +17,7 @@
     background-size: 100%;
     transform: skewY(-6deg);
     transform-origin: top left;
-    filter: brightness(50%);
+    filter: brightness(100%);
 }
 
 .skewed-header > .skewed-header-wrapper {
